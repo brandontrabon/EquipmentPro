@@ -14,11 +14,17 @@ var functions = {
     read: function(request, response) {
         var token = request.body.token || request.query.token || request.headers['x-access-token'];
         var decodedToken = jwt.decode(token, config.secret);
+
+        if (request.params.username !== decodedToken.username)
+            return response.status(400).send({success: false, message: 'Invalid token for username.'});
         
         User.findOne({
             username: request.params.username
         }, function(err, user) {
             if (err) throw err;
+
+            if (user && user.currentToken !== token)
+                return response.status(400).send({success: false, message: 'Invalid token.'});
 
             if (!user) {
                 return response.status(403).send({success: false, message: 'User was not found.'});

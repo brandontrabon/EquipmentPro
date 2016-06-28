@@ -16,7 +16,8 @@ var UserSchema = new Schema({
     middleInitial: { type: String, required: false },
     lastName: { type: String, required: true },
     addresses: [AddressSchema],
-    claims: [ClaimSchema]
+    claims: [ClaimSchema],
+    currentToken: { type: String, required: false }
 });
 
 UserSchema.pre('save', function(next) {
@@ -40,8 +41,6 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods.comparePassword = function (passw, cb) {
-    console.log(passw);
-    console.log(this.password);
     bcrypt.compare(passw, this.password, function (err, isMatch) {
         if (err) {
             return cb(err);

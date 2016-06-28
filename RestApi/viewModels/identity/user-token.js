@@ -7,6 +7,7 @@ var UserViewModel = function(model) {
     
     vm.username = model.username;
     vm.claims = model.claims;
+    vm.createDate = Date.now();
 };
 
 module.exports = UserViewModel;
