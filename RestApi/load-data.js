@@ -88,7 +88,7 @@ mongoose.connection.on('open', function() {
     });
 
     var adminAddress = new Address({
-        addressType: addressTypeHome,
+        addressTypeId: addressTypeHome._id,
         address1: '1229 Vincent Place',
         city: 'Pflugerville',
         stateProvince: 'TX',
@@ -110,7 +110,7 @@ mongoose.connection.on('open', function() {
     });
 
     var userAddress = new Address({
-        addressType: addressTypeWork,
+        addressTypeId: addressTypeWork._id,
         address1: '1234 Work Address',
         city: 'Austin',
         stateProvince: 'TX',

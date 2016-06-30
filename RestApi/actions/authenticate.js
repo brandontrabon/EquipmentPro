@@ -3,7 +3,7 @@
  */
 
 var User = require('../models/identity/user');
-var UserViewModel = require('../viewModels/identity/user-token');
+var UserTokenViewModel = require('../viewModels/identity/user-token');
 var jwt = require('jwt-simple');
 var config = require('../config/database');
 
@@ -19,7 +19,7 @@ var functions = {
             } else {
                 user.comparePassword(request.body.password, function(err, isMatch) {
                     if (isMatch && !err) {
-                        var userToken = new UserViewModel(user);
+                        var userToken = new UserTokenViewModel(user);
                         var token = jwt.encode(userToken, config.secret);
                         
                         user.currentToken = token;

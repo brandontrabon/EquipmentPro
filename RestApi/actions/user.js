@@ -6,10 +6,51 @@ var jwt = require('jwt-simple');
 
 var config = require('../config/database');
 var User = require('../models/identity/user');
+var UserClaim = require('../models/identity/user-claim-value');
+var Address = require('../models/address');
+var UserViewModel = require('../viewModels/identity/user');
 
 var functions = {
     create: function(request, response) {
+        // creating a new user account doesn't require a token
+        var userData = request.body;
 
+        var user = new User({
+            username: userData.username,
+            password: userData.password,
+            firstName: userData.firstName,
+            middleInitial: userData.middleInitial,
+            lastName: userData.lastName
+        });
+
+        userData.addresses.forEach(function(address) {
+            var userAddress = new Address({
+                addressTypeId: address.addressTypeId,
+                address1: address.address1,
+                address2: address.address2,
+                city: address.city,
+                stateProvince: address.stateProvince,
+                postalCode: address.postalCode
+            });
+
+            user.addresses.push(userAddress);
+        });
+
+        var userClaim = new UserClaim({
+            claimName: 'user_name',
+            claimValue: {
+                "username": userData.username
+            }
+        });
+
+        user.claims.push(userClaim);
+
+        user.save(function(err, data) {
+            if (err)
+                return response.status(400).send({ success: false, message: 'User create failed.' });
+            else
+                return response.status(200).send({ success: true });
+        });
     },
     read: function(request, response) {
         var token = request.body.token || request.query.token || request.headers['x-access-token'];
@@ -29,9 +70,10 @@ var functions = {
             if (!user) {
                 return response.status(403).send({success: false, message: 'User was not found.'});
             } else {
-                response.json(user);
+                var viewModel = new UserViewModel(user);
+                response.json(viewModel);
             }
-        })
+        });
     },
     update: function(request, response) {
 

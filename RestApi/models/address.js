@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var AddressTypeSchema = require('./addressType').schema;
 
 var AddressSchema = new Schema({
-    addressType: { type: AddressTypeSchema, ref: 'addressTypes' },
+    addressTypeId: { type: Schema.ObjectId, required: true },
     address1: { type: String, required: true },
     address2: { type: String, required: false },
     city: { type: String, required: true },
