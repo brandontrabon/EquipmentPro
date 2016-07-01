@@ -62,7 +62,8 @@ var functions = {
         User.findOne({
             username: request.params.username
         }, function(err, user) {
-            if (err) throw err;
+            if (err)
+                return response.status(500).send(err);
 
             if (user && user.currentToken !== token)
                 return response.status(400).send({success: false, message: 'Invalid token.'});
@@ -76,7 +77,34 @@ var functions = {
         });
     },
     update: function(request, response) {
+        var token = request.body.token || request.query.token || request.headers['x-access-token'];
+        var decodedToken = jwt.decode(token, config.secret);
+        
+        if (request.params.username !== decodedToken.username)
+            return response.status(400).send({ success: false, message: 'Cannot update another user.' });
+        
+        User.findOne({
+            username: request.params.username
+        }, function(err, user) {
+            if (err)
+                return response.status(500).send(err);
+            
+            if (!user)
+                return response.status(403).send({ success: false, message: 'User was not found.' });
+            
+            if (user && user.currentToken !== token)
+                return response.status(400).send({ success: false, message: 'Invalid token.' });
+            
+            var userData = request.body;
+            
+            user.firstName = userData.firstName;
+            user.middleInitial = userData.middleInitial;
+            user.lastName = userData.lastName;
 
+            userData.addresses.forEach(function(address) {
+                
+            });
+        });
     },
     delete: function(request, response) {
 

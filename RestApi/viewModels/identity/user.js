@@ -14,10 +14,7 @@ var UserViewModel = function(model) {
     model.addresses.forEach(function(address) {
         var addressVm = {
             id: address._id,
-            addressType: {
-                id: address.addressType._id,
-                name: address.addressType.name
-            },
+            addressTypeId: address.addressType._id,
             address1: address.address1,
             address2: address.address2 ? address.address2 : "",
             city: address.city,
