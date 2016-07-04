@@ -8,6 +8,7 @@ var UserTokenViewModel = function(model) {
     // the id is stored to make updating easier
     vm.id = model._id;
     vm.username = model.username;
+    vm.roles = model.roles;
     vm.claims = model.claims;
     vm.createDate = Date.now();
 };

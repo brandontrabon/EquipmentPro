@@ -6,16 +6,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
+var RoleSchema = require('./role').schema;
 var ClaimSchema = require('./user-claim-value').schema;
 var AddressSchema = require('../address').schema;
 
 var UserSchema = new Schema({
+    userTypeId: { type: Schema.ObjectId, required: true },
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     middleInitial: { type: String, required: false },
     lastName: { type: String, required: true },
+    companyName: { type: String, required: true },
     addresses: [AddressSchema],
+    roles: [RoleSchema],
     claims: [ClaimSchema],
     currentToken: { type: String, required: false }
 });

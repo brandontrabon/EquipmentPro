@@ -8,9 +8,12 @@ var morgan = require('morgan');
 var cors = require('cors');
 var passport = require('passport');
 var bodyParser = require('body-parser');
+var config = require('./config/database');
+
 var authRoute = require('./routes/authenticate');
 var userRoute = require('./routes/user');
-var config = require('./config/database');
+var addressTypeRoute = require('./routes/addressType');
+var userTypeRoute = require('./routes/userType');
 
 mongoose.connect(config.database);
 mongoose.connection.on('open', function() {
@@ -24,10 +27,13 @@ mongoose.connection.on('open', function() {
 
     app.use(authRoute);
     app.use(userRoute);
+    app.use(addressTypeRoute);
+    app.use(userTypeRoute);
 
     require('./config/passport')(passport);
 
-    app.listen(4100, function (err) {
-        console.log('server is running');
+    app.listen(4100, function (error) {
+        if (error) console.error(error);
+        else console.log('server is running');
     });
 });

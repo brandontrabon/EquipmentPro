@@ -9,7 +9,7 @@ var ClaimSchema = require('./claim').schema;
 
 var RoleSchema = new Schema({
     name: { type: String, unique: true, required: true },
-    claims: [ClaimSchema]
+    claims: [{ type: Schema.ObjectId, unique: false, ref: 'claims' }]
 });
 
 module.exports = mongoose.model('roles', RoleSchema);

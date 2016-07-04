@@ -3,13 +3,13 @@
  */
 
 var express = require('express');
-var actions = require('../actions/user');
+var userActions = require('../actions/user');
 
 var router = express.Router();
 
-router.post('/api/user', actions.create);
-router.get('/api/user/:username', actions.read);
-router.put('/api/user', actions.update);
-router.delete('/api/user', actions.delete);
+router.post('/api/user', userActions.create);
+router.get('/api/user/:username', userActions.read);
+router.put('/api/user/:username', userActions.update);
+router.delete('/api/user/:username', userActions.remove);
 
 module.exports = router;

@@ -23,8 +23,8 @@ var functions = {
                         var token = jwt.encode(userToken, config.secret);
                         
                         user.currentToken = token;
-                        user.save(function(err, data) {
-                            if (err) console.error(err);
+                        user.save(function(error) {
+                            if (error) console.error(error);
                         });
 
                         response.json({success: true, token: token});
