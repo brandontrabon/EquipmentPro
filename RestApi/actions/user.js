@@ -11,6 +11,8 @@ var UserClaim = require('../models/identity/user-claim-value');
 var Address = require('../models/address');
 var UserViewModel = require('../viewModels/identity/user');
 
+var ServiceEnvelope = require('../common/serviceEnvelope');
+
 var UserActions = function() {
     var vm = this;
 
@@ -58,7 +60,7 @@ var UserActions = function() {
         var decodedToken = jwt.decode(token, config.secret);
 
         if (request.params.username !== decodedToken.username)
-            return response.status(400).send({success: false, message: 'Invalid token for username.'});
+            return response.status(400).send(ServiceEnvelope.createFailureEnvelope('Invalid token for username.'));
 
         User.findOne({
             username: request.params.username
@@ -67,13 +69,13 @@ var UserActions = function() {
                 return response.status(500).send(err);
 
             if (user && user.currentToken !== token)
-                return response.status(400).send({success: false, message: 'Invalid token.'});
+                return response.status(400).send(ServiceEnvelope.createFailureEnvelope('Invalid token.'));
 
             if (!user) {
-                return response.status(403).send({success: false, message: 'User was not found.'});
+                return response.status(403).send(ServiceEnvelope.createFailureEnvelope('User was not found.'));
             } else {
                 var viewModel = new UserViewModel(user);
-                response.json(viewModel);
+                response.json(ServiceEnvelope.createSuccessEnvelope(viewModel));
             }
         });
     }
@@ -83,7 +85,7 @@ var UserActions = function() {
         var decodedToken = jwt.decode(token, config.secret);
 
         if (request.params.username !== decodedToken.username)
-            return response.status(400).send({ success: false, message: 'Cannot update another user.' });
+            return response.status(400).send(ServiceEnvelope.createFailureEnvelope('Cannot update another user.'));
 
         User.findOne({
             username: request.params.username
@@ -92,10 +94,10 @@ var UserActions = function() {
                 return response.status(500).send(err);
 
             if (!user)
-                return response.status(403).send({ success: false, message: 'User was not found.' });
+                return response.status(403).send(ServiceEnvelope.createFailureEnvelope('User was not found.'));
 
             if (user && user.currentToken !== token)
-                return response.status(400).send({ success: false, message: 'Invalid token.' });
+                return response.status(400).send(ServiceEnvelope.createFailureEnvelope('Invalid token.'));
 
             var userData = request.body;
 
@@ -127,28 +129,28 @@ var UserActions = function() {
         var decodedToken = jwt.decode(token, config.secret);
 
         if (request.params.username !== decodedToken.username)
-            return response.status(400).send({ success: false, message: 'Cannot update another user.' });
+            return response.status(400).send(ServiceEnvelope.createFailureEnvelope('Cannot update another user.'));
 
         User.findOne({
             username: request.params.username
         }, function(error, user) {
             if (error) return response.status(500).send(error);
-            if (!user) return response.status(403).send({ success: false, message: 'User was not found.' });
+            if (!user) return response.status(403).send(ServiceEnvelope.createFailureEnvelope('User was not found.'));
             if (user.currentToken !== token)
-                return response.status(400).send({ success: false, message: 'Invalid token.'});
+                return response.status(400).send(ServiceEnvelope.createFailureEnvelope('Invalid token.'));
 
             user.remove(function(error) {
-                if (error) return response.staus(400).send({ success: false, message: 'User was not deleted.' });
+                if (error) return response.staus(400).send(ServiceEnvelope.createFailureEnvelope('User was not deleted.'));
             })
         });
     }
 
     function _save(userModel, response) {
-        userModel.save(function(error) {
+        userModel.save(function(error, data) {
             if (error)
-                return response.status(400).send({ success: false, message: 'User information save error: ' + error });
+                return response.status(400).send(ServiceEnvelope.createFailureEnvelope('User information save error: ' + error));
             else
-                return response.status(200).send({ success: true });
+                return response.status(200).send(ServiceEnvelope.createSuccessEnvelope(data));
         });
     }
 
