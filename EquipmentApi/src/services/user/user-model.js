@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AddressSchema = require('./address-model').schema;
+const RoleSchema = require('../role/role-model').schema;
+const ClaimSchema = require('./user-claim-value-model').schema;
 
 const userSchema = new Schema({
   facebookId: { type: String },
@@ -31,6 +33,8 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   companyName: { type: String, required: true },
   addresses: [AddressSchema],
+  roles: [RoleSchema],
+  claims: [ClaimSchema],
 
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
