@@ -1,4 +1,5 @@
 'use strict';
+const equipmentItemBid = require('./equipmentItemBid');
 const role = require('./role');
 const claim = require('./claim');
 const equipmentType = require('./equipmentType');
@@ -22,4 +23,5 @@ module.exports = function() {
   app.configure(equipmentType);
   app.configure(claim);
   app.configure(role);
+  app.configure(equipmentItemBid);
 };

@@ -11,6 +11,10 @@ const Schema = mongoose.Schema;
 const equipmentItemSchema = new Schema({
   equipmentTypeId: { type: Schema.ObjectId, ref: 'equipmentType' },
   name: { type: String, required: true },
+  description: { type: String, required: false },
+  startingPrice: { type: Double, required: true },
+  minimumPrice: { type: Double, required: true },
+  buyNowPrice: { type: Double, required: false },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
 });
