@@ -1,0 +1,26 @@
+{
+  "name": "equipment_web",
+  "description": "Equipment purchasing web site",
+  "main": "index.js",
+  "authors": [
+    "Brandon Trabon"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/brandontrabon/EquipmentPro",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-material": "^1.1.0",
+    "requirejs": "^2.2.0",
+    "font-awesome": "^4.6.3",
+    "domReady": "^2.0.1",
+    "angular-ui-router": "^0.3.1"
+  }
+}

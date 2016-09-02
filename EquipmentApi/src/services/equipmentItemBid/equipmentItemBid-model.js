@@ -16,7 +16,7 @@ const equipmentItemBidSchema = new Schema({
   equipmentItemId: { type: Schema.ObjectId, ref: 'equipmentItem' },
   userId: { type: Schema.ObjectId, ref: 'user' },
   bidAmount: { type: Currency, required: true },
-  isActive: { type: Schema.Boolean, default: true },
+  isActive: { type: Boolean, default: true },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
 });
