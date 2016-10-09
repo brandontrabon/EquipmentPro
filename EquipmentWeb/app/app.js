@@ -4,6 +4,6 @@
 
 'use strict';
 
-define(['angular'], function(ng) {
-    return ng.module('equipmentPro', []);
+define(['angular', 'angular-material', 'ui-router'], function(ng) {
+    return ng.module('equipmentPro', ['ngMaterial', 'ui.router']);
 });

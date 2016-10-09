@@ -1,4 +1,5 @@
 'use strict';
+const equipmentItemImage = require('./equipmentItemImage');
 const equipmentItemPayment = require('./equipmentItemPayment');
 const equipmentItemBid = require('./equipmentItemBid');
 const role = require('./role');
@@ -26,4 +27,5 @@ module.exports = function() {
   app.configure(role);
   app.configure(equipmentItemBid);
   app.configure(equipmentItemPayment);
+  app.configure(equipmentItemImage);
 };

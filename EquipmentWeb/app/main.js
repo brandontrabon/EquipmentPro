@@ -9,7 +9,7 @@ require.config({
         'angular-animate': './bower_components/angular-animate/angular-animate',
         'angular-aria': './bower_components/angular-aria/angular-aria',
         'angular-material': './bower_components/angular-material/angular-material',
-        'angular-messages': './bower_components/angular-messages/angular-messages',
+        'angular-message': './bower_components/angular-messages/angular-messages',
         'ui-router': './bower_components/angular-ui-router/release/angular-ui-router'
     },
     shim: {

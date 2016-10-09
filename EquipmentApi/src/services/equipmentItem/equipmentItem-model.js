@@ -13,7 +13,7 @@ require('mongoose-currency').loadType(mongoose);
 var Currency = mongoose.Types.Currency;
 
 const equipmentItemSchema = new Schema({
-  equipmentTypeId: { type: Schema.ObjectId, ref: 'equipmentType' },
+  equipmentTypeId: { type: Schema.ObjectId, required: true, ref: 'equipmentType' },
   name: { type: String, required: true },
   description: { type: String, required: false },
   startingPrice: { type: Currency, required: true },

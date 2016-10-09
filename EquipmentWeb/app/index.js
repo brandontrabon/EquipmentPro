@@ -3,5 +3,8 @@
  */
 
 define([
-    './app'
+    './app',
+    './app.routes',
+    './toolbar.controller',
+    './home/home'
 ], function(){});
