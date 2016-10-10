@@ -9,44 +9,62 @@
     <script data-main="main" src="bower_components/requirejs/require.js"></script>
 </head>
 <body layout="row">
-    <md-sidenav layout="column"
-                class="md-sidenav-left md-whiteframe-z2"
-                md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-tall md-hue-2">
-            <span flex></span>
-            <div layout="column" class="md-toolbar-tools-bottom inset">
-                <i class="material-icons">person</i>
-                <span></span>
-                <div>Firstname Lastname</div>
-                <div>email@domain.com</div>
-            </div>
-        </md-toolbar>
-        <md-list>
-            <md-list-item>
-                <a>
-                    <md-content md-ink-ripple layout="row" layout-align="start center">
-                        <div class="inset">
-                            <i class="material-icons">home</i>
+    <div layout-gt-sm="row" layout="column" layout-fill>
+        <div flex ng-controller="ToolbarController as tc">
+            <md-toolbar layout="row">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Menu" ng-click="tc.toggleMenu()">
+                        <md-icon class="material-icons">menu</md-icon>
+                    </md-button>
+                    <span>Toolbar Text</span>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+            <section layout="row" flex>
+                <md-sidenav
+                        class="md-sidenav-left"
+                        md-component-id="left"
+                        md-whiteframe="4"
+                        layout="column">
+                    <md-toolbar class="md-tall md-hue-2">
+                        <span flex></span>
+                        <div layout="column" class="md-toolbar-tools-bottom inset">
+                            <i class="material-icons md-36">person</i>
+                            <span></span>
+                            <div>Firstname Lastname</div>
+                            <div>email@domain.com</div>
                         </div>
-                        <div class="inset">Home</div>
+                    </md-toolbar>
+                    <md-content layout-padding>
+                        <md-list>
+                            <md-list-item flex>
+                                <a ng-click="null">
+                                    <div md-ink-ripple layout="row">
+                                        <div class="inset">
+                                            <i class="material-icons">home</i>
+                                        </div>
+                                        <div class="inset">Home</div>
+                                    </div>
+                                </a>
+                            </md-list-item>
+                            <md-list-item flex>
+                                <a ng-click="null">
+                                    <div md-ink-ripple layout="row">
+                                        <div class="inset">
+                                            <i class="material-icons">list</i>
+                                        </div>
+                                        <div class="inset">List</div>
+                                    </div>
+                                </a>
+                            </md-list-item>
+                        </md-list>
                     </md-content>
-                </a>
-            </md-list-item>
-            <md-list-item>
-                <a>
-                    <md-content md-ink-ripple layout="row" layout-align="start center">
-                        <div class="inset">
-                            <i class="material-icons">list</i>
-                        </div>
-                        <div class="inset">List</div>
-                    </md-content>
-                </a>
-            </md-list-item>
-        </md-list>
-    </md-sidenav>
-    <div layout="column" class="relative" layout-fill role="main">
-        <ui-view></ui-view>
+                </md-sidenav>
+                <div layout="column" class="relative" layout-fill role="main">
+                    <ui-view></ui-view>
+                </div>
+            </section>
+        </div>
     </div>
 </body>
 </html>
