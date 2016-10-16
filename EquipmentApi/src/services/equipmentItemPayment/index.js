@@ -10,8 +10,8 @@ module.exports = function() {
   const options = {
     Model: equipmentItemPayment,
     paginate: {
-      default: 5,
-      max: 25
+      default: 10,
+      max: 50
     }
   };
 

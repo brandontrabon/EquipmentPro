@@ -23,6 +23,12 @@ define(['./app', 'angular'], function(app) {
                 templateUrl: 'home/home.template.html',
                 controller: 'HomeController',
                 controllerAs: 'hc'
+            })
+            .state('base.list', {
+                url: '/list',
+                templateUrl: 'list/list.template.html',
+                controller: 'ListController',
+                controllerAs: 'lc'
             });
 
             $urlRouterProvider.otherwise('/home');

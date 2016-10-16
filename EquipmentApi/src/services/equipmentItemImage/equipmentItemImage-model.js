@@ -13,6 +13,7 @@ const equipmentItemImageSchema = new Schema({
   name: { type: String, required: true },
   location: { type: String, required: true },
   description: { type: String, required: false },
+  isMainImage: { type: Boolean, required: true, default: false },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
 });
