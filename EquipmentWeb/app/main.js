@@ -10,7 +10,8 @@ require.config({
         'angular-aria': './bower_components/angular-aria/angular-aria',
         'angular-material': './bower_components/angular-material/angular-material',
         'angular-message': './bower_components/angular-messages/angular-messages',
-        'ui-router': './bower_components/angular-ui-router/release/angular-ui-router'
+        'ui-router': './bower_components/angular-ui-router/release/angular-ui-router',
+        'angular-paging': './bower_components/material-angular-paging/build/dist.min'
     },
     shim: {
         'angular': {
@@ -30,6 +31,9 @@ require.config({
         },
         'ui-router': {
             deps: ['angular']
+        },
+        'angular-paging': {
+            deps: ['angular-material']
         }
     },
     deps: ['./bootstrap']

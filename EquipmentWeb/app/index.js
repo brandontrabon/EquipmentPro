@@ -5,6 +5,8 @@
 define([
     './app',
     './app.routes',
+    './services/service.base',
     './toolbar.controller',
-    './home/home'
+    './home/home',
+    './list/list'
 ], function(){});

@@ -10,6 +10,8 @@ define(['../app'], function(app) {
             var vm = this;
             
             vm.data = [];
+            
+            ListService.getData();
         };
         
         controller.$inject = ['ListService'];
